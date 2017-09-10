@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../_partials/head %>
+</head>
+
+<body>
+  <div id="wrapper">
+    <% include ../_partials/header %>
+
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1 class="page-header">WOWY</h1>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <form>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label for="pq-player1name">Primary Player Name</label>
+                  <select name="q2player1id" id="pq-player1name" class="form-control">
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label for="pq-player2name">Secondary Player Name</label>
+                  <select name="q2player2id" id="pq-player2name" class="form-control">
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <div class="form-group">
+                  <label for="pq-team">Team</label>
+                  <input name="q2team" id="pq-team" class="form-control" type="text" placeholder="Team Abbr">
+                </div>
+              </div>
+              <div class="col-md-6 col-xs-12">
+                <label for="pq-daterange">Date Range</label>
+                <div id="pq-daterange" class="input-group">
+                  <input name="q1datestart" id="pq-datestart" class="form-control pq-datepicker" type="text" placeholder="YYYY-MM-DD">
+                  <div class="input-group-addon">&dash;</div>
+                  <input name="q1dateend" id="pq-dateend" class="form-control pq-datepicker" type="text" placeholder="YYYY-MM-DD">
+                </div>
+              </div>
+              <div class="col-md-6 col-md-offset-6 col-xs-12 text-right">
+                <button class="btn btn-default" type="submit">Go</button>
+                <button class="btn btn-default" type="reset">Reset</button>
+                <button class="btn btn-default" type="button">
+                    <i class="fa fa-save fa-fw"></i>
+                  </button>
+              </div>
+            </form>
+          </div>
+          <!-- /.form -->
+
+          <div class="row" id="pq-wowydata">
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+  </div>
+
+  <% include ../_partials/scripts %>
+
+  <!-- WOWY JavaScript -->
+  <script src="/puckiq/js/pq-wowy.js"></script>
+</body>
+
+</html>

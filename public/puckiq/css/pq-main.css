@@ -1,0 +1,49 @@
+nav.navbar-custom {
+  border-bottom: 1px solid #80c242;
+  background-color: #666;
+}
+
+@media (min-width: 768px) {
+  .navbar-brand img {
+    margin-left: 50px;
+  }
+}
+
+.navbar-brand img {
+  margin-top: -14px;
+  max-width: 100px;
+  max-height: 50px;
+}
+
+nav.navbar-custom a {
+  color: #80c242;
+}
+
+nav.navbar-custom a:hover {
+  color: #80c242;
+}
+
+nav.navbar-custom li > a:hover {
+  background-color: #d7d8d9;
+  color: #666;
+}
+
+.navbar-toggle .icon-bar {
+  background-color: #80c242;
+}
+
+.form-control:focus {
+  border-color: #80c242;
+  box-shadow: 0 0 8px rgba(128, 194, 66, 0.6);
+}
+
+.btn:focus, .btn:active:focus, .btn.active {
+  border: 1px solid #80c242;
+  box-shadow: 0 0 8px rgba(128, 194, 66, 0.6);
+  outline: 0 none;
+}
+
+.input-group-addon {
+  border-left: none;
+  border-right: none;
+}
