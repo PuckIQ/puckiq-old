@@ -19,6 +19,7 @@
 
 
           <div class="row">
+            <% // When this form is submitted it controlled by pq-wowy-range.js which loads ajax/ax-wowy-range.ejs %>
             <form>
               <div class="col-md-6 col-xs-12">
                 <div class="form-group">
@@ -49,15 +50,24 @@
                 </div>
               </div>
               <div class="col-md-6 col-md-offset-6 col-xs-12 text-right">
-                <button class="btn btn-default" type="submit">Go</button>
-                <button class="btn btn-default" type="reset">Reset</button>
-                <button class="btn btn-default" type="button">
+                <label for="pq-buttons">&nbsp;</label>
+                <div class="form-group" id="pq-buttons">
+                  <button class="btn btn-default" type="submit">Go</button>
+                  <button class="btn btn-default" type="reset">Reset</button>
+                  <button class="btn btn-default" type="button" disabled="disabled">
                     <i class="fa fa-save fa-fw"></i>
                   </button>
+                </div>
               </div>
             </form>
           </div>
           <!-- /.form -->
+
+          <div class="row" id="pq-loader">
+            <div class="col-xs-12 text-center">
+              <div class="loader"></div>
+            </div>
+          </div>
 
           <div class="row" id="pq-wowydata">
           </div>
@@ -68,8 +78,8 @@
 
   <% include ../_partials/scripts %>
 
-  <!-- WOWY JavaScript -->
-  <script src="/puckiq/js/pq-wowy.js"></script>
+    <!-- WOWY JavaScript -->
+    <script src="/puckiq/js/pq-wowy-range.js"></script>
 </body>
 
 </html>

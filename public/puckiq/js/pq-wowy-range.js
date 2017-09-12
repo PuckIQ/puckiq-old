@@ -1,12 +1,3 @@
-var nhlteams = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.whitespace,
-  queryTokenizer: Bloodhound.tokenizers.whitespace,
-  remote: {
-    url: 'http://api.puckiq.org/puckiq/0/teams/getTeamSearch?abbr=%QUERY',
-    wildcard: '%QUERY'
-  }
-});
-
 $('#pq-team').typeahead(null, {
   name: 'pq-team-search',
   display: 'team',
@@ -75,10 +66,22 @@ $("#pq-dateend").on("dp.change", function (e) {
 
 $('form').submit(function () {
   $.ajax({
-    url: '/ajax/wowy-range?' + $(this).serialize()
+    url: '/ajax/wowy-range?' + $(this).serialize(),
+    complete: function() {
+      $('#pq-loader').css('display','none');
+      $('#pq-wowydata').css('display','block');
+    },
+    beforeSend: function() {
+      $('#pq-loader').css('display','block');
+      $('#pq-wowydata').css('display','none');
+    }
   }).done(function (data) {
     $('#pq-wowydata').html(data);
-    $('table').DataTable();
-  })
+  });
   return false;
+});
+
+$('button[type=reset]').on('click', function() {
+  $('#pq-player1name, #pq-player2name').val(null).trigger('change');
+  $('#pq-wowydata').css('display','none');
 });
