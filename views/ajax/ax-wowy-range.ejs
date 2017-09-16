@@ -1,364 +1,94 @@
 <div class="col-xs-12">
-  <h3>Data</h3>
+  <h4 id="pq-playernamebyid"><%= player1info.fullName; %></h4>
 </div>
 <div class="col-xs-12">
-  <div class="panel with-nav-tabs panel-default">
+  <div class="panel with-nav-pills panel-default">
     <div class="panel-heading">
-      <ul class="nav nav-tabs nav-justified">
+      <ul class="nav nav-pills nav-justified">
         <li class="active">
-          <a href="#pq-1w2" data-toggle="tab">Player With</a>
-          </li>
-          <li>
-            <a href="#pq-1wo2" data-toggle="tab">Player Without</a>
-          </li>
-          <li>
-            <a href="#pq-2wo1" data-toggle="tab">Other Player Without</a>
-          </li>
+          <a href="#pq-1w2" data-toggle="tab"><%= player1info.lastName; %> With...</a>
+        </li>
+        <li>
+          <a href="#pq-1wo2" data-toggle="tab"><%= player1info.lastName; %> Without...</a>
+        </li>
+        <li>
+          <a href="#pq-2wo1" data-toggle="tab">...Without <%= player1info.lastName; %></a>
+        </li>
       </ul>
     </div>
     <div class="panel-body">
-      <div class="tab-content">
-        <!-- Player 1 with Player 2 -->
-        <div id="pq-1w2" class="tab-pane fade in active table-responsive">
-          <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-            <thead>
-              <tr>
-                <th>Player</th>
-                <th>TM</th>
-                <th>GameType</th>
-                <th>EVTOI</th>
-                <th>GF</th>
-                <th>GA</th>
-                <th>GF%</th>
-                <th>GF/60</th>
-                <th>GA/60</th>
-                <th>SF</th>
-                <th>SA</th>
-                <th>SF%</th>
-                <th>SF/60</th>
-                <th>SA/60</th>
-                <th>CF</th>
-                <th>CA</th>
-                <th>CF%</th>
-                <th>CF/60</th>
-                <th>CA/60</th>
-                <th>FF</th>
-                <th>FA</th>
-                <th>FF%</th>
-                <th>FF/60</th>
-                <th>FA/60</th>
-              </tr>
-            </thead>
-            <tbody>
+      <div class="tab-content pq-scrolling pq-outer">
+        <% var withWithout = [{id: 'pq-1w2', type: '1 and 2'},{id: 'pq-1wo2', type: '1 not 2'},{id: 'pq-2wo1', type: '2 not 1'}]; %>
+        <% for(var x = 0; x < withWithout.length; x++) { %>
+          <div id="<%= withWithout[x].id; %>" class="tab-pane fade in <%= (x > 0) ? null : 'active'; %> pq-inner table-condensed table-responsive table-striped stripe">
+            <table class="table table-hover table-bordered" cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="pq-col-200">Player</th>
+                  <th class="pq-col-50">Pos</th>
+                  <th class="pq-col-50">Type</th>
+                  <th class="pq-col-50">Team</th>
+                  <th class="pq-col-50">GT</th>
+                  <th class="pq-col-75">EVTOI</th>
+                  <th class="pq-col-50">GF</th>
+                  <th class="pq-col-50">GA</th>
+                  <th class="pq-col-50">GF%</th>
+                  <th class="pq-col-50">GF/60</th>
+                  <th class="pq-col-50">GA/60</th>
+                  <th class="pq-col-50">SF</th>
+                  <th class="pq-col-50">SA</th>
+                  <th class="pq-col-50">SF%</th>
+                  <th class="pq-col-50">SF/60</th>
+                  <th class="pq-col-50">SA/60</th>
+                  <th class="pq-col-50">CF</th>
+                  <th class="pq-col-50">CA</th>
+                  <th class="pq-col-50">CF%</th>
+                  <th class="pq-col-50">CF/60</th>
+                  <th class="pq-col-50">CA/60</th>
+                  <th class="pq-col-50">FF</th>
+                  <th class="pq-col-50">FA</th>
+                  <th class="pq-col-50">FF%</th>
+                  <th class="pq-col-50">FF/60</th>
+                  <th class="pq-col-50">FA/60</th>
+                </tr>
+              </thead>
+              <tbody>
               <% for (var i = 0; i < data.length; i++) { %>
-                <% if(data[i].type === '1 and 2') { %>
-                  <tr>
-                    <td>
-                      <%= data[i].player2.fullName %>
-                    </td>
-                    <td>
-                      <%= data[i].team %>
-                    </td>
-                    <td>
-                      <%= (data[i].gametype == 2) ? 'R' : 'P' %>
-                    </td>
-                    <td>
-                      <%= data[i].evtoi %>
-                    </td>
-                    <td>
-                      <%= data[i].gf %>
-                    </td>
-                    <td>
-                      <%= data[i].ga %>
-                    </td>
-                    <td>
-                      <%= data[i].gfpct %>
-                    </td>
-                    <td>
-                      <%= data[i].gf60 %>
-                    </td>
-                    <td>
-                      <%= data[i].ga60 %>
-                    </td>
-                    <td>
-                      <%= data[i].sf %>
-                    </td>
-                    <td>
-                      <%= data[i].sa %>
-                    </td>
-                    <td>
-                      <%= data[i].sfpct %>
-                    </td>
-                    <td>
-                      <%= data[i].sf60 %>
-                    </td>
-                    <td>
-                      <%= data[i].sa60 %>
-                    </td>
-                    <td>
-                      <%= data[i].cf %>
-                    </td>
-                    <td>
-                      <%= data[i].ca %>
-                    </td>
-                    <td>
-                      <%= data[i].cfpct %>
-                    </td>
-                    <td>
-                      <%= data[i].cf60 %>
-                    </td>
-                    <td>
-                      <%= data[i].ca60 %>
-                    </td>
-                    <td>
-                      <%= data[i].ff %>
-                    </td>
-                    <td>
-                      <%= data[i].fa %>
-                    </td>
-                    <td>
-                      <%= data[i].ffpct %>
-                    </td>
-                    <td>
-                      <%= data[i].ff60 %>
-                    </td>
-                    <td>
-                      <%= data[i].fa60 %>
-                    </td>
-                  </tr>
+                <% if(data[i].type === withWithout[x].type) { %>
+                <tr>
+                  <td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/<%= data[i].player2.playerid %>"><%= data[i].player2.fullName %></a></td>
+                  <td class="pq-col-50"><%= data[i].player2.position %></td>
+                  <td class="pq-col-50"><%= data[i].player2.type.substr(0,1) %></td>
+                  <td class="pq-col-50"><%= data[i].team %></td>
+                  <td class="pq-col-50"><%= (data[i].gametype == 2) ? 'R' : 'P' %></td>
+                  <td class="text-right pq-col-75"><%= data[i].evtoi %></td>
+                  <td class="text-right pq-col-50"><%= data[i].gf %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ga %></td>
+                  <td class="text-right pq-col-50"><%= data[i].gfpct.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].gf60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ga60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sf %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sa %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sfpct.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sf60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sa60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].cf %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ca %></td>
+                  <td class="text-right pq-col-50"><%= data[i].cfpct.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].cf60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ca60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ff %></td>
+                  <td class="text-right pq-col-50"><%= data[i].fa %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ffpct.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].ff60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].fa60.toFixed(1) %></td>
+                </tr>
                 <% } %>
               <% } %>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Player 1 without Player 2 -->
-        <div id="pq-1wo2" class="tab-pane fade table-responsive">
-            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th>Player</th>
-                  <th>TM</th>
-                  <th>GameType</th>
-                  <th>EVTOI</th>
-                  <th>GF</th>
-                  <th>GA</th>
-                  <th>GF%</th>
-                  <th>GF/60</th>
-                  <th>GA/60</th>
-                  <th>SF</th>
-                  <th>SA</th>
-                  <th>SF%</th>
-                  <th>SF/60</th>
-                  <th>SA/60</th>
-                  <th>CF</th>
-                  <th>CA</th>
-                  <th>CF%</th>
-                  <th>CF/60</th>
-                  <th>CA/60</th>
-                  <th>FF</th>
-                  <th>FA</th>
-                  <th>FF%</th>
-                  <th>FF/60</th>
-                  <th>FA/60</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for (var i = 0; i < data.length; i++) { %>
-                  <% if(data[i].type === '1 not 2') { %>
-                    <tr>
-                      <td>
-                        <%= data[i].player2.fullName %>
-                      </td>
-                      <td>
-                        <%= data[i].team %>
-                      </td>
-                      <td>
-                        <%= (data[i].gametype == 2) ? 'R' : 'P' %>
-                      </td>
-                      <td>
-                        <%= data[i].evtoi %>
-                      </td>
-                      <td>
-                        <%= data[i].gf %>
-                      </td>
-                      <td>
-                        <%= data[i].ga %>
-                      </td>
-                      <td>
-                        <%= data[i].gfpct %>
-                      </td>
-                      <td>
-                        <%= data[i].gf60 %>
-                      </td>
-                      <td>
-                        <%= data[i].ga60 %>
-                      </td>
-                      <td>
-                        <%= data[i].sf %>
-                      </td>
-                      <td>
-                        <%= data[i].sa %>
-                      </td>
-                      <td>
-                        <%= data[i].sfpct %>
-                      </td>
-                      <td>
-                        <%= data[i].sf60 %>
-                      </td>
-                      <td>
-                        <%= data[i].sa60 %>
-                      </td>
-                      <td>
-                        <%= data[i].cf %>
-                      </td>
-                      <td>
-                        <%= data[i].ca %>
-                      </td>
-                      <td>
-                        <%= data[i].cfpct %>
-                      </td>
-                      <td>
-                        <%= data[i].cf60 %>
-                      </td>
-                      <td>
-                        <%= data[i].ca60 %>
-                      </td>
-                      <td>
-                        <%= data[i].ff %>
-                      </td>
-                      <td>
-                        <%= data[i].fa %>
-                      </td>
-                      <td>
-                        <%= data[i].ffpct %>
-                      </td>
-                      <td>
-                        <%= data[i].ff60 %>
-                      </td>
-                      <td>
-                        <%= data[i].fa60 %>
-                      </td>
-                    </tr>
-                  <% } %>
-                <% } %>
               </tbody>
             </table>
           </div>
-
-          <!-- Player 1 with Player 2 -->
-        <div id="pq-2wo1" class="tab-pane fade table-responsive">
-            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th>Player</th>
-                  <th>TM</th>
-                  <th>GameType</th>
-                  <th>EVTOI</th>
-                  <th>GF</th>
-                  <th>GA</th>
-                  <th>GF%</th>
-                  <th>GF/60</th>
-                  <th>GA/60</th>
-                  <th>SF</th>
-                  <th>SA</th>
-                  <th>SF%</th>
-                  <th>SF/60</th>
-                  <th>SA/60</th>
-                  <th>CF</th>
-                  <th>CA</th>
-                  <th>CF%</th>
-                  <th>CF/60</th>
-                  <th>CA/60</th>
-                  <th>FF</th>
-                  <th>FA</th>
-                  <th>FF%</th>
-                  <th>FF/60</th>
-                  <th>FA/60</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for (var i = 0; i < data.length; i++) { %>
-                  <% if(data[i].type === '2 not 1') { %>
-                    <tr>
-                      <td>
-                        <%= data[i].player2.fullName %>
-                      </td>
-                      <td>
-                        <%= data[i].team %>
-                      </td>
-                      <td>
-                        <%= (data[i].gametype == 2) ? 'R' : 'P' %>
-                      </td>
-                      <td>
-                        <%= data[i].evtoi %>
-                      </td>
-                      <td>
-                        <%= data[i].gf %>
-                      </td>
-                      <td>
-                        <%= data[i].ga %>
-                      </td>
-                      <td>
-                        <%= data[i].gfpct %>
-                      </td>
-                      <td>
-                        <%= data[i].gf60 %>
-                      </td>
-                      <td>
-                        <%= data[i].ga60 %>
-                      </td>
-                      <td>
-                        <%= data[i].sf %>
-                      </td>
-                      <td>
-                        <%= data[i].sa %>
-                      </td>
-                      <td>
-                        <%= data[i].sfpct %>
-                      </td>
-                      <td>
-                        <%= data[i].sf60 %>
-                      </td>
-                      <td>
-                        <%= data[i].sa60 %>
-                      </td>
-                      <td>
-                        <%= data[i].cf %>
-                      </td>
-                      <td>
-                        <%= data[i].ca %>
-                      </td>
-                      <td>
-                        <%= data[i].cfpct %>
-                      </td>
-                      <td>
-                        <%= data[i].cf60 %>
-                      </td>
-                      <td>
-                        <%= data[i].ca60 %>
-                      </td>
-                      <td>
-                        <%= data[i].ff %>
-                      </td>
-                      <td>
-                        <%= data[i].fa %>
-                      </td>
-                      <td>
-                        <%= data[i].ffpct %>
-                      </td>
-                      <td>
-                        <%= data[i].ff60 %>
-                      </td>
-                      <td>
-                        <%= data[i].fa60 %>
-                      </td>
-                    </tr>
-                  <% } %>
-                <% } %>
-              </tbody>
-            </table>
-          </div>
+        <% } %>
       </div>
     </div>
   </div>

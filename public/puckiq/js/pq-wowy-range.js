@@ -57,7 +57,7 @@ $('#pq-dateend').datetimepicker({
 });
 
 $("#pq-datestart").on("dp.change", function (e) {
-  $('#pq-dateend').data("DateTimePicker").minDate(e.date);
+  $('#pq-dateend').data("DateTimePicker").minDate(e.date).date(e.date);
 });
 
 $("#pq-dateend").on("dp.change", function (e) {
@@ -77,6 +77,18 @@ $('form').submit(function () {
     }
   }).done(function (data) {
     $('#pq-wowydata').html(data);
+    $('#pq-1w2 > table').DataTable({
+      orderClasses: false,
+      'stripeClasses':['stripe1','stripe2']
+    });
+    $('#pq-1wo2 > table').DataTable({
+      orderClasses: false,
+      'stripeClasses':['stripe1','stripe2']
+    });
+    $('#pq-2wo1 > table').DataTable({
+      orderClasses: false,
+      'stripeClasses':['stripe1','stripe2']
+    });
   });
   return false;
 });

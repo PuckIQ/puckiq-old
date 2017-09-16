@@ -7,15 +7,15 @@ var baseUrl = 'http://' + config.api.host + '/' + config.api.base;
 
 /* GET home page. */
 router.get('/wowy-range', function (req, res, next) {
+  var query = req.query;
   var serialize = serializeQuery(req.query);
   console.log(baseUrl + '/m2/schedule/getRangeWowy?' + serialize);
   request.get({ url: baseUrl + '/m2/schedule/getRangeWowy?' + serialize, json: true }, (err, response, data) => {
     var datacheck = (!err && response.statusCode != 200) ? false : true;
     var wowy = (!err && response.statusCode != 200) ? [] : data;
-
-    console.log(response.statusCode);
-
-    res.render('ajax/ax-wowy-range', { check: datacheck, data: wowy });
+    request.get({ url: baseUrl + '/m2/players/getPlayer?playerid=' + query.q2player1id, json: true}, (e, r, d) => {
+      res.render('ajax/ax-wowy-range', { check: datacheck, data: wowy, queryData: query, player1info: d[0] });
+    });
   })
 });
 
