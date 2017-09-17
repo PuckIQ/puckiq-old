@@ -32,7 +32,30 @@ $('#pq-player1name, #pq-player2name').select2({
     cache: false
   },
   escapeMarkup: function (markup) { return markup; },
-  minimumInputLength: 1
+  minimumInputLength: 1,
+  allowClear: true
+});
+
+var postype = [
+  { id: 'A', text: 'All' },
+  { id: 'F', text: 'Forward' },
+  { id: 'D', text: 'Defense' },
+  { id: 'G', text: 'Goalie' },
+  { id: 'L', text: 'Left Wing' },
+  { id: 'R', text: 'Right Wing' },
+  { id: 'C', text: 'Centre' }
+];
+
+$('#pq-postype').select2({
+  theme: "bootstrap",
+  placeholder: {
+    id: -1,
+    text: 'Player Type...'
+  },
+  delay: 250,
+  data: postype,
+  allowClear: true,
+  maximumSelectionLength: 2
 });
 
 $('#pq-datestart').datetimepicker({
@@ -67,33 +90,33 @@ $("#pq-dateend").on("dp.change", function (e) {
 $('form').submit(function () {
   $.ajax({
     url: '/ajax/wowy-range?' + $(this).serialize(),
-    complete: function() {
-      $('#pq-loader').css('display','none');
-      $('#pq-wowydata').css('display','block');
+    complete: function () {
+      $('#pq-loader').css('display', 'none');
+      $('#pq-wowydata').css('display', 'block');
     },
-    beforeSend: function() {
-      $('#pq-loader').css('display','block');
-      $('#pq-wowydata').css('display','none');
+    beforeSend: function () {
+      $('#pq-loader').css('display', 'block');
+      $('#pq-wowydata').css('display', 'none');
     }
   }).done(function (data) {
     $('#pq-wowydata').html(data);
     $('#pq-1w2 > table').DataTable({
       orderClasses: false,
-      'stripeClasses':['stripe1','stripe2']
+      'stripeClasses': ['stripe1', 'stripe2']
     });
     $('#pq-1wo2 > table').DataTable({
       orderClasses: false,
-      'stripeClasses':['stripe1','stripe2']
+      'stripeClasses': ['stripe1', 'stripe2']
     });
     $('#pq-2wo1 > table').DataTable({
       orderClasses: false,
-      'stripeClasses':['stripe1','stripe2']
+      'stripeClasses': ['stripe1', 'stripe2']
     });
   });
   return false;
 });
 
-$('button[type=reset]').on('click', function() {
+$('button[type=reset]').on('click', function () {
   $('#pq-player1name, #pq-player2name').val(null).trigger('change');
-  $('#pq-wowydata').css('display','none');
+  $('#pq-wowydata').css('display', 'none');
 });
