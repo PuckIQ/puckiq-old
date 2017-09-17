@@ -14,19 +14,25 @@
         <li>
           <a href="#pq-2wo1" data-toggle="tab">...Without <%= player1info.lastName; %></a>
         </li>
+        <li>
+          <a href="#pq-all" data-toggle="tab"><%= player1info.lastName; %> All</a>
+        </li>
       </ul>
     </div>
     <div class="panel-body">
       <div class="tab-content pq-scrolling pq-outer">
-        <% var withWithout = [{id: 'pq-1w2', type: '1 and 2'},{id: 'pq-1wo2', type: '1 not 2'},{id: 'pq-2wo1', type: '2 not 1'}]; %>
+        <% var withWithout = [{id: 'pq-1w2', type: '1 and 2'},{id: 'pq-1wo2', type: '1 not 2'},{id: 'pq-2wo1', type: '2 not 1'},{id: 'pq-all', type: 'all'}]; %>
         <% for(var x = 0; x < withWithout.length; x++) { %>
           <div id="<%= withWithout[x].id; %>" class="tab-pane fade in <%= (x > 0) ? null : 'active'; %> pq-inner table-condensed table-responsive table-striped stripe">
             <table class="table table-hover table-bordered" cellspacing="0">
               <thead>
                 <tr>
-                  <th class="pq-col-200">Player</th>
+                  <th class="pq-col-200">Player 2</th>
+                  <% if(x === 3) { %>
+                    <th class="pq-col-100">WOWY</th>
+                  <% } %>
                   <th class="pq-col-50">Pos</th>
-                  <th class="pq-col-50">Type</th>
+                  <th class="pq-col-50">Season</th>
                   <th class="pq-col-50">Team</th>
                   <th class="pq-col-50">GT</th>
                   <th class="pq-col-75">EVTOI</th>
@@ -50,17 +56,30 @@
                   <th class="pq-col-50">FF%</th>
                   <th class="pq-col-50">FF/60</th>
                   <th class="pq-col-50">FA/60</th>
+                  <th class="pq-col-50">DFF</th>
+                  <th class="pq-col-50">DFA</th>
+                  <th class="pq-col-50">DFF%</th>
+                  <th class="pq-col-50">DFF/60</th>
+                  <th class="pq-col-50">DFA/60</th>
+                  <th class="pq-col-50">SACF</th>
+                  <th class="pq-col-50">SACA</th>
+                  <th class="pq-col-50">SACF%</th>
+                  <th class="pq-col-50">SACF/60</th>
+                  <th class="pq-col-50">SACA/60</th>
                 </tr>
               </thead>
               <tbody>
               <% for (var i = 0; i < data.length; i++) { %>
-                <% if(data[i].type === withWithout[x].type) { %>
+                <% if(data[i].type === withWithout[x].type || withWithout[x].type === 'all') { %>
                 <tr>
                   <td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/<%= data[i].player2.playerid %>"><%= data[i].player2.fullName %></a></td>
-                  <td class="pq-col-50"><%= data[i].player2.position %></td>
-                  <td class="pq-col-50"><%= data[i].player2.type.substr(0,1) %></td>
+                  <% if(withWithout[x].type === 'all') { %>
+                    <td class="pq-col-100"><%= data[i].type %></td>
+                  <% } %>
+                  <td class="pq-col-50"><%= (data[i].player2.possible).join(', ') %></td>
+                  <td class="pq-col-50"><%= data[i].season %></td>
                   <td class="pq-col-50"><%= data[i].team %></td>
-                  <td class="pq-col-50"><%= (data[i].gametype == 2) ? 'R' : 'P' %></td>
+                  <td class="pq-col-50"><%= (data[i].gametype == 2) ? 'Reg' : 'PO' %></td>
                   <td class="text-right pq-col-75"><%= data[i].evtoi %></td>
                   <td class="text-right pq-col-50"><%= data[i].gf %></td>
                   <td class="text-right pq-col-50"><%= data[i].ga %></td>
@@ -82,6 +101,16 @@
                   <td class="text-right pq-col-50"><%= data[i].ffpct.toFixed(1) %></td>
                   <td class="text-right pq-col-50"><%= data[i].ff60.toFixed(1) %></td>
                   <td class="text-right pq-col-50"><%= data[i].fa60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].dff.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].dfa.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].dffpct.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].dff60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].dfa60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sacf.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].saca.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sacfpct.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].sacf60.toFixed(1) %></td>
+                  <td class="text-right pq-col-50"><%= data[i].saca60.toFixed(1) %></td>
                 </tr>
                 <% } %>
               <% } %>

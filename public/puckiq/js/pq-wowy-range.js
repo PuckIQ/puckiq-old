@@ -37,8 +37,6 @@ $('#pq-player1name, #pq-player2name').select2({
 });
 
 var postype = [
-  { id: 'A', text: 'All' },
-  { id: 'F', text: 'Forward' },
   { id: 'D', text: 'Defense' },
   { id: 'G', text: 'Goalie' },
   { id: 'L', text: 'Left Wing' },
@@ -109,6 +107,10 @@ $('form').submit(function () {
       'stripeClasses': ['stripe1', 'stripe2']
     });
     $('#pq-2wo1 > table').DataTable({
+      orderClasses: false,
+      'stripeClasses': ['stripe1', 'stripe2']
+    });
+    $('#pq-all > table').DataTable({
       orderClasses: false,
       'stripeClasses': ['stripe1', 'stripe2']
     });
