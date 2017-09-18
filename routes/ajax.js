@@ -22,7 +22,7 @@ router.get('/wowy-range', function (req, res, next) {
 function serializeQuery(query) {
   var serialized = "";
   Object.keys(query).forEach(function (key) {
-    if (query[key] !== '' && typeof key !== 'undefined')
+    if (query[key] !== '' && typeof key !== 'undefined' && key.substr(0,2) != 'q3')
       serialized += key.toString() + '=' + query[key].toString() + '&';
   });
   return serialized.substr(0, serialized.length - 1);

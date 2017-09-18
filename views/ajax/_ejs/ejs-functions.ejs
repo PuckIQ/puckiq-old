@@ -1,0 +1,27 @@
+<%
+  getPlayerType = function(rtpos, pqpos) {
+    var show = false;
+    if(typeof pqpos !== 'undefined') {
+      rtpos.forEach(function(pos) {
+        if(pqpos.indexOf(pos) > -1)
+          show = true;
+        });
+    } else {
+      show = true;
+    }
+
+    return show;
+  }
+
+  getDisplayType = function(rtdisplay, pqdisplay) {
+    var show = false;
+    if(typeof pqdisplay !== 'undefined') {
+      if(pqdisplay.indexOf(rtdisplay) > -1)
+        show = true;
+    } else {
+      show = true;
+    }
+
+    return show;
+  }
+%>

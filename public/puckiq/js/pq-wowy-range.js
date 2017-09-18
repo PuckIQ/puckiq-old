@@ -44,16 +44,35 @@ var postype = [
   { id: 'C', text: 'Centre' }
 ];
 
+var stattype = [
+  { id: 'G', text: 'Goals'},
+  { id: 'S', text: 'Shots'},
+  { id: 'C', text: 'Corsi'},
+  { id: 'F', text: 'Fenwick'},
+  { id: 'D', text: 'Dangerous'},
+  { id: 'A', text: 'Score Adjusted'}
+]
+
 $('#pq-postype').select2({
   theme: "bootstrap",
   placeholder: {
     id: -1,
-    text: 'Player Type...'
+    text: 'Position...'
   },
   delay: 250,
   data: postype,
-  allowClear: true,
-  maximumSelectionLength: 2
+  allowClear: true
+});
+
+$('#pq-display').select2({
+  theme: "bootstrap",
+  placeholder: {
+    id: -1,
+    text: 'Stat Type...'
+  },
+  delay: 250,
+  data: stattype,
+  allowClear: true
 });
 
 $('#pq-datestart').datetimepicker({

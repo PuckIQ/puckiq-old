@@ -21,28 +21,35 @@
           <div class="row">
             <% // When this form is submitted it controlled by pq-wowy-range.js which loads ajax/ax-wowy-range.ejs %>
             <form>
-              <div class="col-md-3 col-xs-12">
+              <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                   <label for="pq-player1name">Primary Player Name</label>
                   <select name="q2player1id" id="pq-player1name" class="form-control">
                   </select>
                 </div>
               </div>
-              <div class="col-md-3 col-xs-12">
+              <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                   <label for="pq-player2name">Secondary Player Name</label>
                   <select name="q2player2id" id="pq-player2name" class="form-control">
                   </select>
                 </div>
               </div>
-              <div class="col-md-3 col-xs-12">
+              <div class="col-md-4 col-xs-12">
                 <div class="form-group">
                   <label for="pq-postype">Position</label>
                   <select name="q3postype[]" id="pq-postype" class="form-control" multiple="multiple">
                   </select>
                 </div>
               </div>
-              <div class="col-md-3 col-xs-12">
+              <div class="col-md-4 col-xs-12">
+                <div class="form-group">
+                  <label for="pq-display">Display</label>
+                  <select name="q3display[]" id="pq-display" class="form-control" multiple="multiple">
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 col-xs-12">
                 <label for="pq-daterange">Date Range</label>
                 <div id="pq-daterange" class="input-group">
                   <input name="q1datestart" id="pq-datestart" class="form-control pq-datepicker" type="text" placeholder="YYYY-MM-DD">
@@ -50,7 +57,7 @@
                   <input name="q1dateend" id="pq-dateend" class="form-control pq-datepicker" type="text" placeholder="YYYY-MM-DD">
                 </div>
               </div>
-              <div class="col-md-6 col-md-offset-6 col-xs-12 text-right">
+              <div class="col-md-4 col-xs-12 text-right">
                 <label for="pq-buttons">&nbsp;</label>
                 <div class="form-group" id="pq-buttons">
                   <button class="btn btn-default" type="submit">Go</button>
