@@ -50,6 +50,7 @@ nav.navbar-custom li > a:hover {
 
 #pq-loader {
   display: none;
+  margin: 10% 50%;
 }
 
 .loader {

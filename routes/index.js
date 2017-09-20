@@ -14,4 +14,8 @@ router.get('/player-wowy-season', function(req, res, next) {
   res.render('pages/player-wowy-season', { });
 });
 
+router.get('/player-wm-season', function(req, res, next) {
+  res.render('pages/player-wm-season', { });
+});
+
 module.exports = router;
