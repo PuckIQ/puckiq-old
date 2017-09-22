@@ -44,12 +44,24 @@ router.get('/wm-season', function (req, res, next) {
 });
 
 function serializeQuery(query) {
+  console.log(query);
   var serialized = "";
   Object.keys(query).forEach(function (key) {
-    if (query[key] !== '' && typeof key !== 'undefined' && key.substr(0, 2) != 'q3')
-      serialized += key.toString() + '=' + query[key].toString() + '&';
+    if (query[key] !== '' && typeof key !== 'undefined' && key.substr(0, 2) != 'q3') {
+      if (isArray(query[key])) {
+        query[key].forEach(function (val) {
+          serialized += key.toString() + '[]=' + val.toString() + '&';
+        });
+      } else {
+        serialized += key.toString() + '=' + query[key].toString() + '&';
+      }
+    }
   });
   return serialized.substr(0, serialized.length - 1);
+}
+
+function isArray(n) {
+  return Array.isArray(n);
 }
 
 module.exports = router;
