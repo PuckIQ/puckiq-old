@@ -122,3 +122,7 @@ table.dataTable > tbody > tr.stripe1 a {
 table.dataTable > tbody > tr.stripe2 a {
   color: #000;
 }
+
+.borderless td, .borderless th {
+  border: none;
+}

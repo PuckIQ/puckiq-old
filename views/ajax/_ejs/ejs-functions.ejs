@@ -24,4 +24,78 @@
 
     return show;
   }
+
+  buildFullWowy = function(pqdisplay, data) {
+    var wowy = new Array();
+    console.log(data);
+
+    for(var i = 0; i < data.length; i++) {
+      var wowyData = data[i];
+      var wowyType = 0;
+      if(i == 0) {
+        wowy[0] = "";
+        wowy[0] += '<td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/' + wowyData.pinfo.p2id + '">' + wowyData.pinfo.p2fullname + '</a></td>'
+        wowy[0] += '<td class="pq-col-50">' + wowyData.pinfo.team + '</td>'
+        wowy[0] += '<td class="pq-col-50">' + (wowyData.pinfo.p2possible).join(', ') + '</td>'
+      }
+
+      switch(wowyData.pinfo.wowytype) {
+        case '1 and 2':
+          wowyType = 1;
+          break;
+        case '1 not 2':
+          wowyType = 2;
+          break;
+        case '2 not 1':
+          wowyType = 3;
+          break;
+      }
+
+      wowy[wowyType] = '<td class="text-right pq-col-50">' + wowyData.evtoi + '</td>';
+      if(getDisplayType('G', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.gf + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ga + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.gfpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.gf60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ga60.toFixed(1) + '</td>';
+      }
+      if(getDisplayType('S', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sf + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sa + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sfpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sf60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sa60.toFixed(1) + '</td>';
+      }
+      if(getDisplayType('C', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.cf + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ca + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.cfpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.cf60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ca60.toFixed(1) + '</td>';
+      }
+      if(getDisplayType('F', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ff + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.fa + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ffpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ff60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.fa60.toFixed(1) + '</td>';
+      }
+      if(getDisplayType('D', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dff.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dfa.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dffpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dff60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dfa60.toFixed(1) + '</td>';
+      }
+      if(getDisplayType('A', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sacf.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.saca.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sacfpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sacf60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.saca60.toFixed(1) + '</td>';
+      }
+    }
+    console.log(wowy);
+    return wowy;
+  }
 %>
