@@ -78,6 +78,17 @@
                       <th class="pq-col-50">SACF/60</th>
                       <th class="pq-col-50">SACA/60</th>
                     <% } %>
+                    <% if(getDisplayType('Z', queryData.q3display)) { %>
+                      <th class="pq-col-50">OZ</th>
+                      <th class="pq-col-50">OZ%</th>
+                      <th class="pq-col-50">OZ/60</th>
+                      <th class="pq-col-50">DZ</th>
+                      <th class="pq-col-50">DZ%</th>
+                      <th class="pq-col-50">DZ/60</th>
+                      <th class="pq-col-50">NZ</th>
+                      <th class="pq-col-50">NZ%</th>
+                      <th class="pq-col-50">NZ/60</th>
+                    <% } %>
                   </tr>
                 </thead>
                 <tbody>
@@ -132,6 +143,17 @@
                         <td class="text-right pq-col-50"><%= currentWowy.sacf60.toFixed(1) %></td>
                         <td class="text-right pq-col-50"><%= currentWowy.saca60.toFixed(1) %></td>
                       <% } %>
+                      <% if(getDisplayType('Z', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.oz %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ozpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.oz60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dz %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dzpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dz60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.nz %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.nzpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.nz60.toFixed(1) %></td>
+                      <% } %>
                     </tr>
                     <% } %>
                   <% } %>
@@ -145,9 +167,10 @@
                 <thead>
                   <tr>
                     <th colspan="3">&nbsp;</th>
-                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 31 : (queryData.q3display.length * 5)+1; %>"><%= player1info.lastName; %> w/Teammate</th>
-                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 31 : (queryData.q3display.length * 5)+1; %>"><%= player1info.lastName; %> w/o Teammate</th>
-                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 31 : (queryData.q3display.length * 5)+1; %>">Teammate w/o <%= player1info.lastName; %></th>
+                    <% var zs = (typeof queryData.q3display !== 'undefined' && queryData.q3display.indexOf('Z') > -1) ? 4 : 0; %>
+                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 40 : (queryData.q3display.length * 5)+1+zs; %>"><%= player1info.lastName; %> w/Teammate</th>
+                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 40 : (queryData.q3display.length * 5)+1+zs; %>"><%= player1info.lastName; %> w/o Teammate</th>
+                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 40 : (queryData.q3display.length * 5)+1+zs; %>">Teammate w/o <%= player1info.lastName; %></th>
                   </tr>
                   <tr>
                     <th class="pq-col-200">Teammate</th>
@@ -196,6 +219,17 @@
                         <th class="pq-col-50">SACF%</th>
                         <th class="pq-col-50">SACF/60</th>
                         <th class="pq-col-50">SACA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('Z', queryData.q3display)) { %>
+                        <th class="pq-col-50">OZ</th>
+                        <th class="pq-col-50">OZ%</th>
+                        <th class="pq-col-50">OZ/60</th>
+                        <th class="pq-col-50">DZ</th>
+                        <th class="pq-col-50">DZ%</th>
+                        <th class="pq-col-50">DZ/60</th>
+                        <th class="pq-col-50">NZ</th>
+                        <th class="pq-col-50">NZ%</th>
+                        <th class="pq-col-50">NZ/60</th>
                       <% } %>
                     <% } %>
                   </tr>

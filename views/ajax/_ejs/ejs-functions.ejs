@@ -95,6 +95,17 @@
         wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.sacf60.toFixed(1) + '</td>';
         wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.saca60.toFixed(1) + '</td>';
       }
+      if(getDisplayType('Z', pqdisplay)) {
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.oz + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.ozpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.oz60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dz + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dzpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.dz60.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.nz + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.nzpct.toFixed(1) + '</td>';
+        wowy[wowyType] += '<td class="text-right pq-col-50">' + wowyData.nz60.toFixed(1) + '</td>';
+      }
     }
     return wowy;
   }

@@ -50,7 +50,8 @@ var stattype = [
   { id: 'C', text: 'Corsi'},
   { id: 'F', text: 'Fenwick'},
   { id: 'D', text: 'Dangerous'},
-  { id: 'A', text: 'Score Adjusted'}
+  { id: 'A', text: 'Score Adjusted'},
+  { id: 'Z', text: 'Zone Start'}
 ]
 
 $('#pq-postype').select2({
