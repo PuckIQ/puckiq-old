@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../_partials/head %>
+</head>
+
+<body>
+  <div id="wrapper">
+    <% include ../_partials/header %>
+
+      <div id="page-wrapper">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12">
+              <h1 class="page-header">WOWY by Range</h1>
+            </div>
+          </div>
+
+
+          <% // When this form is submitted it controlled by pq-wowy-range.js which loads ajax/ax-wowy-range.ejs %>
+            <form>
+              <div class="row">
+                <div class="col-md-4 col-xs-12">
+                  <div class="form-group">
+                    <label for="pq-team">Team</label>
+                    <select name="q2team" id="pq-team" class="form-control">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <div class="form-group">
+                    <label for="pq-postype">P1 Position</label>
+                    <select name="q3p1postype[]" id="pq-p1postype" class="form-control" multiple="multiple">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <div class="form-group">
+                    <label for="pq-postype">P2 Position</label>
+                    <select name="q3p2postype[]" id="pq-p2postype" class="form-control" multiple="multiple">
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-xs-12">
+                  <div class="form-group">
+                    <label for="pq-display">Display</label>
+                    <select name="q3display[]" id="pq-display" class="form-control" multiple="multiple">
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                  <label for="pq-daterange">Date Range</label>
+                  <input type="text" name="q3daterange" id="pq-calendar" class="form-control pq-daterange">
+                  <input type="hidden" name="q1datestart" id="pq-datestart" value="">
+                  <input type="hidden" name="q1dateend" id="pq-dateend" value="">
+                </div>
+                <div class="col-md-4 col-xs-12 text-right">
+                  <label for="pq-buttons">&nbsp;</label>
+                  <div class="form-group" id="pq-buttons">
+                    <button class="btn btn-default" type="submit">Go</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-- /.form -->
+
+            <div class="row" id="pq-loader">
+              <div class="col-xs-12 text-center">
+                <div class="loader"></div>
+              </div>
+            </div>
+
+            <div class="row" id="pq-wowydata">
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+      </div>
+  </div>
+
+  <% include ../_partials/scripts %>
+
+    <!-- WOWY JavaScript -->
+    <script src="/puckiq/js/pq-team-wowy-range.js"></script>
+</body>
+
+</html>

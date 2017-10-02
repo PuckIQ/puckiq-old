@@ -126,3 +126,17 @@ table.dataTable > tbody > tr.stripe2 a {
 .borderless td, .borderless th {
   border: none;
 }
+
+
+.dt-buttons {
+  width: 20%;
+}
+
+.dataTables_filter {
+  width: 80%;
+  float: right;
+}
+
+/*.calendar-table td.active {
+  background-color: #80c242;
+}*/

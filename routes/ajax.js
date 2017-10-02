@@ -8,8 +8,8 @@ var baseUrl = 'http://' + config.api.host + '/' + config.api.base;
 /* GET home page. */
 router.get('/wowy-range', function (req, res, next) {
   var query = req.query;
+  delete query.q0daterange;
   var serialize = serializeQuery(req.query);
-  console.log(baseUrl + '/m2/schedule/getRangeWowy?' + serialize);
   request.get({ url: baseUrl + '/m2/schedule/getRangeWowy?' + serialize, json: true }, (err, response, data) => {
     var datacheck = (!err && response.statusCode != 200) ? false : true;
     var wowy = (!err && response.statusCode != 200) ? [] : data;
@@ -31,6 +31,31 @@ router.get('/wowy-season', function (req, res, next) {
   });
 });
 
+router.get('/team-wowy-range', function (req, res, next) {
+  var query = req.query;
+  var serialize = serializeQuery(req.query);
+  console.log(serialize);
+  request.get({ url: baseUrl + '/m2/schedule/getRangeWowy?' + serialize, json: true }, (err, response, data) => {
+    var datacheck = (!err && response.statusCode != 200) ? false : true;
+    var wowy = (!err && response.statusCode != 200) ? [] : data;
+    request.get({ url: baseUrl + '/m2/teams/getTeam?abbr=' + query.team, json: true }, (e, r, d) => {
+      res.render('ajax/ax-team-wowy-range', { check: datacheck, data: wowy, queryData: query, teaminfo: d[0] });
+    });
+  });
+});
+
+router.get('/team-wowy-season', function (req, res, next) {
+  var query = req.query;
+  var serialize = serializeQuery(req.query);
+  request.get({ url: baseUrl + '/m2/seasonwowy/getSeasonWowy?' + serialize, json: true }, (err, response, data) => {
+    var datacheck = (!err && response.statusCode != 200) ? false : true;
+    var wowy = (!err && response.statusCode != 200) ? [] : data;
+    request.get({ url: baseUrl + '/m2/teams/getTeam?abbr=' + query.team, json: true }, (e, r, d) => {
+      res.render('ajax/ax-team-wowy-season', { check: datacheck, data: wowy, queryData: query, teaminfo: d[0] });
+    });
+  });
+});
+
 router.get('/wm-season', function (req, res, next) {
   var query = req.query;
   var serialize = serializeQuery(req.query);
@@ -44,7 +69,6 @@ router.get('/wm-season', function (req, res, next) {
 });
 
 function serializeQuery(query) {
-  console.log(query);
   var serialized = "";
   Object.keys(query).forEach(function (key) {
     if (query[key] !== '' && typeof key !== 'undefined' && key.substr(0, 2) != 'q3') {

@@ -45,13 +45,13 @@ var postype = [
 ];
 
 var stattype = [
-  { id: 'G', text: 'Goals'},
-  { id: 'S', text: 'Shots'},
-  { id: 'C', text: 'Corsi'},
-  { id: 'F', text: 'Fenwick'},
-  { id: 'D', text: 'Dangerous'},
-  { id: 'A', text: 'Score Adjusted'},
-  { id: 'Z', text: 'Zone Start'}
+  { id: 'G', text: 'Goals' },
+  { id: 'S', text: 'Shots' },
+  { id: 'C', text: 'Corsi' },
+  { id: 'F', text: 'Fenwick' },
+  { id: 'D', text: 'Dangerous' },
+  { id: 'A', text: 'Score Adjusted' },
+  { id: 'Z', text: 'Zone Start' }
 ]
 
 $('#pq-postype').select2({
@@ -76,33 +76,25 @@ $('#pq-display').select2({
   allowClear: true
 });
 
-$('#pq-datestart').datetimepicker({
-  icons: {
-    time: "fa fa-clock-o",
-    date: "fa fa-calendar",
-    up: "fa fa-arrow-up",
-    down: "fa fa-arrow-down"
+$('#pq-calendar').daterangepicker({
+  "alwaysShowCalendars": true,
+  "opens": "left",
+  ranges: {
+    'Today': [moment(), moment()],
+    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment().endOf('month')],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
   },
-  format: 'YYYY-MM-DD'
+  locale: {
+    format: 'MMM D, YYYY'
+  }
 });
 
-$('#pq-dateend').datetimepicker({
-  icons: {
-    time: "fa fa-clock-o",
-    date: "fa fa-calendar",
-    up: "fa fa-arrow-up",
-    down: "fa fa-arrow-down"
-  },
-  format: 'YYYY-MM-DD',
-  useCurrent: false
-});
-
-$("#pq-datestart").on("dp.change", function (e) {
-  $('#pq-dateend').data("DateTimePicker").minDate(e.date).date(e.date);
-});
-
-$("#pq-dateend").on("dp.change", function (e) {
-  $('#pq-datestart').data("DateTimePicker").maxDate(e.date);
+$('#pq-calendar').on('apply.daterangepicker', function (ev, picker) {
+  $('#pq-datestart').val(picker.startDate.format('YYYY-MM-DD'));
+  $('#pq-dateend').val(picker.endDate.format('YYYY-MM-DD'));
 });
 
 $('form').submit(function () {
@@ -120,19 +112,67 @@ $('form').submit(function () {
     $('#pq-wowydata').html(data);
     $('#pq-1w2 > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-1w2-wowybyrange-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
     $('#pq-1wo2 > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-1wo2-wowybyrange-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
     $('#pq-2wo1 > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-2wo1-wowybyrange-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
     $('#pq-all > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-all-wowybyrange-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
   });
   return false;

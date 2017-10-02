@@ -152,6 +152,7 @@ $('#pq-season').select2({
 });
 
 $('form').submit(function () {
+  var formdata = $(this);
   $.ajax({
     url: '/ajax/wowy-season?' + $(this).serialize(),
     complete: function () {
@@ -166,19 +167,67 @@ $('form').submit(function () {
     $('#pq-wowydata').html(data);
     $('#pq-1w2 > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-1w2-wowybyseason-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
     $('#pq-1wo2 > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-1wo2-wowybyseason-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
     $('#pq-2wo1 > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-2wo1-wowybyseason-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
     $('#pq-all > table').DataTable({
       orderClasses: false,
-      'stripeClasses': ['stripe1', 'stripe2']
+      'stripeClasses': ['stripe1', 'stripe2'],
+      dom: 'Bfrtip',
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="fa fa-save fa-fw"></i> CSV',
+          filename: 'PuckIQ-all-wowybyseason-' + $('#pq-player1name').val()
+        },
+        {
+          extend: 'print',
+          text: '<i class="fa fa-print fa-fw"></i>',
+        }
+      ]
     });
   });
   return false;

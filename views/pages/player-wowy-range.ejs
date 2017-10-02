@@ -53,20 +53,14 @@
                 </div>
                 <div class="col-md-4 col-xs-12">
                   <label for="pq-daterange">Date Range</label>
-                  <div id="pq-daterange" class="input-group">
-                    <input name="q1datestart" id="pq-datestart" class="form-control pq-datepicker" type="text" placeholder="YYYY-MM-DD">
-                    <div class="input-group-addon">&dash;</div>
-                    <input name="q1dateend" id="pq-dateend" class="form-control pq-datepicker" type="text" placeholder="YYYY-MM-DD">
-                  </div>
+                  <input type="text" name="q0daterange" id="pq-calendar" class="form-control pq-daterange">
+                  <input type="hidden" name="q1datestart" id="pq-datestart" value="">
+                  <input type="hidden" name="q1dateend" id="pq-dateend" value="">
                 </div>
                 <div class="col-md-4 col-xs-12 text-right">
                   <label for="pq-buttons">&nbsp;</label>
                   <div class="form-group" id="pq-buttons">
                     <button class="btn btn-default" type="submit">Go</button>
-                    <button class="btn btn-default" type="reset">Reset</button>
-                    <button class="btn btn-default" type="button" disabled="disabled">
-                      <i class="fa fa-save fa-fw"></i>
-                    </button>
                   </div>
                 </div>
               </div>

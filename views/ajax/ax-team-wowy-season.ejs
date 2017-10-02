@@ -1,0 +1,263 @@
+<div class="col-xs-12">
+  <h4 id="pq-teamnamebyid"><%= teaminfo.name; %></h4>
+</div>
+<div class="col-xs-12">
+  <div class="panel with-nav-pills panel-default">
+    <div class="panel-heading">
+      <ul class="nav nav-pills nav-justified">
+        <li class="active">
+          <a href="#pq-1w2" data-toggle="tab">Player 1 w/Player 2</a>
+        </li>
+        <li>
+          <a href="#pq-1wo2" data-toggle="tab">Player 1 w/o Player 2</a>
+        </li>
+        <li>
+          <a href="#pq-2wo1" data-toggle="tab">Player 2 w/o Player 1</a>
+        </li>
+        <li>
+          <a href="#pq-all" data-toggle="tab">All Situations</a>
+        </li>
+      </ul>
+    </div>
+    <div class="panel-body">
+      <div class="tab-content pq-scrolling pq-outer">
+        <% include _ejs/ejs-functions %>
+        <% var withWithout = [{id: 'pq-1w2', type: '1 and 2'},{id: 'pq-1wo2', type: '1 not 2'},{id: 'pq-2wo1', type: '2 not 1'},{id: 'pq-all', type: 'all'}]; %>
+        <% for(var x = 0; x < withWithout.length; x++) { %>
+          <% if (withWithout[x].type != 'all') { %>
+            <div id="<%= withWithout[x].id; %>" class="tab-pane fade in <%= (x > 0) ? null : 'active'; %> pq-inner table-condensed table-responsive table-striped stripe">
+              <table class="table table-hover table-bordered" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th class="pq-col-200">Player 1 (P1)</th>
+                    <th class="pq-col-50">P1 Pos</th>
+                    <th class="pq-col-200">Player 2 (P2)</th>
+                    <th class="pq-col-50">P2 Pos</th>
+                    <th class="pq-col-50">Season</th>
+                    <th class="pq-col-50">Team</th>
+                    <th class="pq-col-75">EVTOI</th>
+                    <% if(getDisplayType('G', queryData.q3display)) { %>
+                      <th class="pq-col-50">GF</th>
+                      <th class="pq-col-50">GA</th>
+                      <th class="pq-col-50">GF%</th>
+                      <th class="pq-col-50">GF/60</th>
+                      <th class="pq-col-50">GA/60</th>
+                    <% } %>
+                    <% if(getDisplayType('S', queryData.q3display)) { %>
+                      <th class="pq-col-50">SF</th>
+                      <th class="pq-col-50">SA</th>
+                      <th class="pq-col-50">SF%</th>
+                      <th class="pq-col-50">SF/60</th>
+                      <th class="pq-col-50">SA/60</th>
+                    <% } %>
+                    <% if(getDisplayType('C', queryData.q3display)) { %>
+                      <th class="pq-col-50">CF</th>
+                      <th class="pq-col-50">CA</th>
+                      <th class="pq-col-50">CF%</th>
+                      <th class="pq-col-50">CF/60</th>
+                      <th class="pq-col-50">CA/60</th>
+                    <% } %>
+                    <% if(getDisplayType('F', queryData.q3display)) { %>
+                    <th class="pq-col-50">FF</th>
+                    <th class="pq-col-50">FA</th>
+                    <th class="pq-col-50">FF%</th>
+                    <th class="pq-col-50">FF/60</th>
+                    <th class="pq-col-50">FA/60</th>
+                    <% } %>
+                    <% if(getDisplayType('D', queryData.q3display)) { %>
+                      <th class="pq-col-50">DFF</th>
+                      <th class="pq-col-50">DFA</th>
+                      <th class="pq-col-50">DFF%</th>
+                      <th class="pq-col-50">DFF/60</th>
+                      <th class="pq-col-50">DFA/60</th>
+                    <% } %>
+                    <% if(getDisplayType('A', queryData.q3display)) { %>
+                      <th class="pq-col-50">SACF</th>
+                      <th class="pq-col-50">SACA</th>
+                      <th class="pq-col-50">SACF%</th>
+                      <th class="pq-col-50">SACF/60</th>
+                      <th class="pq-col-50">SACA/60</th>
+                    <% } %>
+                    <% if(getDisplayType('Z', queryData.q3display)) { %>
+                      <th class="pq-col-50">OZ</th>
+                      <th class="pq-col-50">OZ%</th>
+                      <th class="pq-col-50">OZ/60</th>
+                      <th class="pq-col-50">DZ</th>
+                      <th class="pq-col-50">DZ%</th>
+                      <th class="pq-col-50">DZ/60</th>
+                      <th class="pq-col-50">NZ</th>
+                      <th class="pq-col-50">NZ%</th>
+                      <th class="pq-col-50">NZ/60</th>
+                    <% } %>
+                  </tr>
+                </thead>
+                <tbody>
+                <% for (var i = 0; i < data.length; i++) { %>
+                  <% for (var w = 0; w < data[i].wowy.length; w++) { %>
+                    <% var currentWowy = data[i].wowy[w]; %>
+                    <% if((currentWowy.pinfo.wowytype === withWithout[x].type) && getPlayerType(currentWowy.pinfo.p2possible, queryData.q3p2postype) == true && getPlayerType(currentWowy.pinfo.p1possible, queryData.q3p1postype) == true) { %>
+                    <tr>
+                      <td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/<%= currentWowy.pinfo.p1id %>"><%= currentWowy.pinfo.p1fullname %></a></td>
+                      <td class="pq-col-50"><%= (currentWowy.pinfo.p1possible).join(', ') %></td>
+                      <td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/<%= currentWowy.pinfo.p2id %>"><%= currentWowy.pinfo.p2fullname %></a></td>
+                      <td class="pq-col-50"><%= (currentWowy.pinfo.p2possible).join(', ') %></td>
+                      <td class="pq-col-50"><%= currentWowy.pinfo.season %></td>
+                      <td class="pq-col-50"><%= currentWowy.pinfo.team %></td>
+                      <td class="text-right pq-col-75"><%= currentWowy.evtoi %></td>
+                      <% if(getDisplayType('G', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.gf %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ga %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.gfpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.gf60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ga60.toFixed(1) %></td>
+                      <% } %>
+                      <% if(getDisplayType('S', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.sf %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.sa %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.sfpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.sf60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.sa60.toFixed(1) %></td>
+                      <% } %>
+                      <% if(getDisplayType('C', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.cf %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ca %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.cfpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.cf60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ca60.toFixed(1) %></td>
+                      <% } %>
+                      <% if(getDisplayType('F', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.ff %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.fa %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ffpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ff60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.fa60.toFixed(1) %></td>
+                      <% } %>
+                      <% if(getDisplayType('D', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.dff.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dfa.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dffpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dff60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dfa60.toFixed(1) %></td>
+                      <% } %>
+                      <% if(getDisplayType('A', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.sacf.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.saca.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.sacfpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.sacf60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.saca60.toFixed(1) %></td>
+                      <% } %>
+                      <% if(getDisplayType('Z', queryData.q3display)) { %>
+                        <td class="text-right pq-col-50"><%= currentWowy.oz %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.ozpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.oz60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dz %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dzpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.dz60.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.nz %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.nzpct.toFixed(1) %></td>
+                        <td class="text-right pq-col-50"><%= currentWowy.nz60.toFixed(1) %></td>
+                      <% } %>
+                    </tr>
+                    <% } %>
+                  <% } %>
+                <% } %>
+                </tbody>
+              </table>
+            </div>
+          <% } else { %>
+            <div id="<%= withWithout[x].id; %>" class="tab-pane fade in <%= (x > 0) ? null : 'active'; %> pq-inner table-condensed table-responsive table-striped stripe">
+              <table class="table table-hover table-bordered" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th colspan="6">&nbsp;</th>
+                    <% var zs = (typeof queryData.q3display !== 'undefined' && queryData.q3display.indexOf('Z') > -1) ? 4 : 0; %>
+                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 40 : (queryData.q3display.length * 5)+1+zs; %>">Player 1 w/Player 2</th>
+                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 40 : (queryData.q3display.length * 5)+1+zs; %>">Player 1 w/o Player 2</th>
+                    <th colspan="<%= (typeof queryData.q3display === 'undefined') ? 40 : (queryData.q3display.length * 5)+1+zs; %>">Player 2 w/o Player 1</th>
+                  </tr>
+                  <tr>
+                    <th class="pq-col-200">Player 1 (P1)</th>
+                    <th class="pq-col-50">P1 Pos</th>
+                    <th class="pq-col-200">Player 2 (P2)</th>
+                    <th class="pq-col-50">P2 Pos</th>
+                    <th class="pq-col-50">Season</th>
+                    <th class="pq-col-50">Team</th>
+                    <% for(var g = 0; g < (withWithout.length)-1; g++) { %>
+                      <th class="pq-col-75">EVTOI</th>
+                      <% if(getDisplayType('G', queryData.q3display)) { %>
+                        <th class="pq-col-50">GF</th>
+                        <th class="pq-col-50">GA</th>
+                        <th class="pq-col-50">GF%</th>
+                        <th class="pq-col-50">GF/60</th>
+                        <th class="pq-col-50">GA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('S', queryData.q3display)) { %>
+                        <th class="pq-col-50">SF</th>
+                        <th class="pq-col-50">SA</th>
+                        <th class="pq-col-50">SF%</th>
+                        <th class="pq-col-50">SF/60</th>
+                        <th class="pq-col-50">SA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('C', queryData.q3display)) { %>
+                        <th class="pq-col-50">CF</th>
+                        <th class="pq-col-50">CA</th>
+                        <th class="pq-col-50">CF%</th>
+                        <th class="pq-col-50">CF/60</th>
+                        <th class="pq-col-50">CA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('F', queryData.q3display)) { %>
+                      <th class="pq-col-50">FF</th>
+                      <th class="pq-col-50">FA</th>
+                      <th class="pq-col-50">FF%</th>
+                      <th class="pq-col-50">FF/60</th>
+                      <th class="pq-col-50">FA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('D', queryData.q3display)) { %>
+                        <th class="pq-col-50">DFF</th>
+                        <th class="pq-col-50">DFA</th>
+                        <th class="pq-col-50">DFF%</th>
+                        <th class="pq-col-50">DFF/60</th>
+                        <th class="pq-col-50">DFA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('A', queryData.q3display)) { %>
+                        <th class="pq-col-50">SACF</th>
+                        <th class="pq-col-50">SACA</th>
+                        <th class="pq-col-50">SACF%</th>
+                        <th class="pq-col-50">SACF/60</th>
+                        <th class="pq-col-50">SACA/60</th>
+                      <% } %>
+                      <% if(getDisplayType('Z', queryData.q3display)) { %>
+                        <th class="pq-col-50">OZ</th>
+                        <th class="pq-col-50">OZ%</th>
+                        <th class="pq-col-50">OZ/60</th>
+                        <th class="pq-col-50">DZ</th>
+                        <th class="pq-col-50">DZ%</th>
+                        <th class="pq-col-50">DZ/60</th>
+                        <th class="pq-col-50">NZ</th>
+                        <th class="pq-col-50">NZ%</th>
+                        <th class="pq-col-50">NZ/60</th>
+                      <% } %>
+                    <% } %>
+                  </tr>
+                </thead>
+                <tbody>
+                <% for (var i = 0; i < data.length; i++) { %>
+                  <% if(getPlayerType(data[i].wowy[0].pinfo.p2possible, queryData.q3p2postype) == true && getPlayerType(data[i].wowy[0].pinfo.p1possible, queryData.q3p1postype) == true) { %>
+                    <tr>
+                      <% var wowyDisplay = buildFullTeamWowy(queryData.q3display, data[i].wowy); %>
+                      <%- wowyDisplay[0]; %>
+                      <%- wowyDisplay[1]; %>
+                      <%- wowyDisplay[2]; %>
+                      <%- wowyDisplay[3]; %>
+                    </tr>
+                  <% } %>
+                <% } %>
+                </tbody>
+              </table>
+              </div>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
