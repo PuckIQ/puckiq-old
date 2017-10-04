@@ -52,12 +52,22 @@
                   </div>
                 </div>
                 <div class="col-md-4 col-xs-12">
-                  <label for="pq-daterange">Date Range</label>
-                  <input type="text" name="q0daterange" id="pq-calendar" class="form-control pq-daterange">
-                  <input type="hidden" name="q1datestart" id="pq-datestart" value="">
-                  <input type="hidden" name="q1dateend" id="pq-dateend" value="">
+                  <div class="form-group">
+                    <label for="pq-toi">Min TOI</label>
+                    <input type="text" name="q3toi" id="pq-toi" class="form-control" value="50">
+                  </div>
                 </div>
-                <div class="col-md-4 col-xs-12 text-right">
+                <div class="col-md-4 col-xs-12">
+                  <label for="pq-daterange">Date Range</label>
+                  <div id="pq-daterange" class="input-group">
+                    <input name="q1datestart" id="pq-datestart" class="form-control pq-datepicker" type="text">
+                    <div class="input-group-addon">&dash;</div>
+                    <input name="q1dateend" id="pq-dateend" class="form-control pq-datepicker" type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-xs-12 col-md-offset-8 text-right">
                   <label for="pq-buttons">&nbsp;</label>
                   <div class="form-group" id="pq-buttons">
                     <button class="btn btn-default" type="submit">Go</button>

@@ -25,30 +25,32 @@
     return show;
   }
 
-  buildFullWowy = function(pqdisplay, data) {
+  buildFullWowy = function(queryData, data) {
+    var pqdisplay = queryData.q3display;
     var wowy = new Array();
 
     for(var i = 0; i < data.length; i++) {
       var wowyData = data[i];
       var wowyType = 0;
       if(i == 0) {
-        wowy[0] = "";
-        wowy[0] += '<td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/' + wowyData.pinfo.p2id + '">' + wowyData.pinfo.p2fullname + '</a></td>';
+        wowy[1] = "";
+        wowy[1] += '<td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/' + wowyData.pinfo.p2id + '">' + wowyData.pinfo.p2fullname + '</a></td>';
         if(typeof wowyData.pinfo.season !== 'undefined')
-          wowy[0] += '<td class="pq-col-50">' + wowyData.pinfo.season + '</td>';
-        wowy[0] += '<td class="pq-col-50">' + wowyData.pinfo.team + '</td>';
-        wowy[0] += '<td class="pq-col-50">' + (wowyData.pinfo.p2possible).join(', ') + '</td>';
+          wowy[1] += '<td class="pq-col-50">' + wowyData.pinfo.season + '</td>';
+        wowy[1] += '<td class="pq-col-50">' + wowyData.pinfo.team + '</td>';
+        wowy[1] += '<td class="pq-col-50">' + (wowyData.pinfo.p2possible).join(', ') + '</td>';
       }
 
       switch(wowyData.pinfo.wowytype) {
         case '1 and 2':
-          wowyType = 1;
+          wowyType = 2;
+          wowy[0] = (wowyData.evtoi >= parseInt(queryData.q3toi)) ? true : false;
           break;
         case '1 not 2':
-          wowyType = 2;
+          wowyType = 3;
           break;
         case '2 not 1':
-          wowyType = 3;
+          wowyType = 4;
           break;
       }
 

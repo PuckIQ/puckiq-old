@@ -95,7 +95,7 @@
                 <% for (var i = 0; i < data.length; i++) { %>
                   <% for (var w = 0; w < data[i].wowy.length; w++) { %>
                     <% var currentWowy = data[i].wowy[w]; %>
-                    <% if((currentWowy.pinfo.wowytype === withWithout[x].type) && getPlayerType(currentWowy.pinfo.p2possible, queryData.q3postype) == true) { %>
+                    <% if((currentWowy.pinfo.wowytype === withWithout[x].type) && getPlayerType(currentWowy.pinfo.p2possible, queryData.q3postype) == true && currentWowy.evtoi >= parseInt(queryData.q3toi)) { %>
                     <tr>
                       <td class="pq-col-200"><i class="fa fa-external-link" aria-hidden="true"></i> <a href="/player-data/<%= currentWowy.pinfo.p2id %>"><%= currentWowy.pinfo.p2fullname %></a></td>
                       <td class="pq-col-50"><%= (currentWowy.pinfo.p2possible).join(', ') %></td>
@@ -237,13 +237,15 @@
                 <tbody>
                 <% for (var i = 0; i < data.length; i++) { %>
                   <% if(getPlayerType(data[i].wowy[0].pinfo.p2possible, queryData.q3postype) == true) { %>
+                    <% var wowyDisplay = buildFullWowy(queryData, data[i].wowy); %>
+                    <% if(wowyDisplay[0]) { %>
                     <tr>
-                      <% var wowyDisplay = buildFullWowy(queryData.q3display, data[i].wowy); %>
-                      <%- wowyDisplay[0]; %>
-                      <%- wowyDisplay[1]; %>
-                      <%- wowyDisplay[2]; %>
-                      <%- wowyDisplay[3]; %>
+                        <%- wowyDisplay[1]; %>
+                        <%- wowyDisplay[2]; %>
+                        <%- wowyDisplay[3]; %>
+                        <%- wowyDisplay[4]; %>
                     </tr>
+                    <% } %>
                   <% } %>
                 <% } %>
                 </tbody>
