@@ -105,12 +105,9 @@ $('form').submit(function () {
           extend: 'csv',
           text: '<i class="fa fa-save fa-fw"></i> CSV',
           filename: 'PuckIQ-1w2-wowybyrange-' + $('#pq-player1name').val()
-        },
-        {
-          extend: 'print',
-          text: '<i class="fa fa-print fa-fw"></i>',
         }
-      ]
+      ],
+      order: [3, 'desc']
     });
     $('#pq-1wo2 > table').DataTable({
       orderClasses: false,
@@ -121,12 +118,9 @@ $('form').submit(function () {
           extend: 'csv',
           text: '<i class="fa fa-save fa-fw"></i> CSV',
           filename: 'PuckIQ-1wo2-wowybyrange-' + $('#pq-player1name').val()
-        },
-        {
-          extend: 'print',
-          text: '<i class="fa fa-print fa-fw"></i>',
         }
-      ]
+      ],
+      order: [3, 'desc']
     });
     $('#pq-2wo1 > table').DataTable({
       orderClasses: false,
@@ -137,12 +131,9 @@ $('form').submit(function () {
           extend: 'csv',
           text: '<i class="fa fa-save fa-fw"></i> CSV',
           filename: 'PuckIQ-2wo1-wowybyrange-' + $('#pq-player1name').val()
-        },
-        {
-          extend: 'print',
-          text: '<i class="fa fa-print fa-fw"></i>',
         }
-      ]
+      ],
+      order: [3, 'desc']
     });
     $('#pq-all > table').DataTable({
       orderClasses: false,
@@ -153,13 +144,10 @@ $('form').submit(function () {
           extend: 'csv',
           text: '<i class="fa fa-save fa-fw"></i> CSV',
           filename: 'PuckIQ-all-wowybyrange-' + $('#pq-player1name').val()
-        },
-        {
-          extend: 'print',
-          text: '<i class="fa fa-print fa-fw"></i>',
         }
-      ]
-    });
+      ],
+      order: [3, 'desc']
+    })
   });
   return false;
 });
